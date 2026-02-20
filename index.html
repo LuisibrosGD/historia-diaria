@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historia Diaria Automatizada</title>
+    <style>
+        /* Esto es CSS: Define cómo se ve la página */
+
+        /* Estilos generales para toda la página */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Una fuente moderna y limpia */
+            background-color: #f0f2f5; /* Un color de fondo gris suave */
+            margin: 0;
+            padding: 20px;
+            display: flex; /* Usamos Flexbox para centrar */
+            justify-content: center; /* Centrado horizontal */
+            align-items: center; /* Centrado vertical */
+            min-height: 90vh; /* Que ocupe casi toda la altura de la pantalla */
+        }
+
+        /* La "tarjeta" blanca que contiene la historia */
+        .container {
+            background-color: #ffffff;
+            padding: 40px;
+            border-radius: 16px; /* Bordes redondeados */
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Una sombra suave para dar profundidad */
+            max-width: 600px; /* Ancho máximo para que no sea muy ancho en pantallas grandes */
+            width: 100%;
+            text-align: center; /* Centramos los títulos y las imágenes */
+        }
+
+        /* Estilo del título */
+        h1 {
+            color: #2d3748;
+            margin-bottom: 25px;
+            font-size: 2rem;
+        }
+
+        /* Estilo de la imagen */
+        .imagen-dia {
+            max-width: 100%; /* Que se adapte al ancho del contenedor */
+            height: auto;
+            border-radius: 12px; /* Bordes redondeados en la imagen */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            margin-bottom: 30px;
+        }
+
+        /* Estilo del texto de la historia */
+        .historia-texto {
+            font-size: 1.15rem;
+            line-height: 1.7; /* Más espacio entre líneas facilita la lectura */
+            color: #4a5568;
+            text-align: left; /* El texto largo se lee mejor alineado a la izquierda */
+            margin-bottom: 40px;
+            padding: 0 10px;
+        }
+
+        /* Pie de página */
+        .footer {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 20px;
+            color: #a0aec0;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>{{TITULO}}</h1>
+        
+        <img src="https://picsum.photos/id/1015/600/350" alt="Imagen del día" class="imagen-dia">
+        
+        <div class="historia-texto">
+            <p>{{HISTORIA}}</
