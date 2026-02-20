@@ -61,7 +61,7 @@ if llave_mes not in historial:
     historial[llave_mes] = []
 
 # Evitar duplicados si ejecutas el script varias veces el mismo día
-if no any(item['archivo'] == nombre_archivo_hoy for item in historial[llave_mes]):
+if not any(item['archivo'] == nombre_archivo_hoy for item in historial[llave_mes]):
     historial[llave_mes].insert(0, {"titulo": nuevo_titulo, "archivo": nombre_archivo_hoy})
 
 # 4. Guardar la base de datos actualizada
