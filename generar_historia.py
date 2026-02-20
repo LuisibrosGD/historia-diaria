@@ -55,13 +55,21 @@ if os.path.exists('historial.json'):
 else:
     historial = {}
 
-# 3. Añadir la historia de hoy a la base de datos
+# 3. Añadir o actualizar la historia de hoy a la base de datos
 llave_mes = f"{nombre_mes} {año}"
 if llave_mes not in historial:
     historial[llave_mes] = []
 
-# Evitar duplicados si ejecutas el script varias veces el mismo día
-if not any(item['archivo'] == nombre_archivo_hoy for item in historial[llave_mes]):
+# Recorremos la lista del mes para ver si ya hay una historia de hoy
+historia_actualizada = False
+for item in historial[llave_mes]:
+    if item['archivo'] == nombre_archivo_hoy:
+        item['titulo'] = nuevo_titulo  # ¡Actualizamos al título más reciente!
+        historia_actualizada = True
+        break
+
+# Si es la primera vez que se ejecuta en el día, lo insertamos como nuevo
+if not historia_actualizada:
     historial[llave_mes].insert(0, {"titulo": nuevo_titulo, "archivo": nombre_archivo_hoy})
 
 # 4. Guardar la base de datos actualizada
