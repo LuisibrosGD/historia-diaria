@@ -23,6 +23,8 @@ jobs:
           python-version: '3.10'
 
       - name: 3. Ejecutar tu script
+        env:
+          OPENROUTER_API_KEY: ${{ secrets.OPENROUTER_API_KEY }}
         run: python generar_historia.py
 
       - name: 4. Guardar los cambios (Hacer Commit y Push)
