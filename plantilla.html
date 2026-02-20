@@ -5,79 +5,130 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Historia Diaria Automatizada</title>
     <style>
-        /* Esto es CSS: Define cómo se ve la página */
-
-        /* Estilos generales para toda la página */
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Una fuente moderna y limpia */
-            background-color: #f0f2f5; /* Un color de fondo gris suave */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f0f2f5;
             margin: 0;
             padding: 20px;
-            display: flex; /* Usamos Flexbox para centrar */
-            justify-content: center; /* Centrado horizontal */
-            align-items: center; /* Centrado vertical */
-            min-height: 90vh; /* Que ocupe casi toda la altura de la pantalla */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 90vh;
         }
 
-        /* La "tarjeta" blanca que contiene la historia */
+        /* --- ESTILOS DEL MENÚ LATERAL --- */
+        #menu-btn {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            font-size: 24px;
+            background: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: -300px; /* Oculto por defecto a la izquierda */
+            width: 250px;
+            height: 100%;
+            background-color: #ffffff;
+            box-shadow: 2px 0 15px rgba(0,0,0,0.2);
+            transition: left 0.3s ease; /* Animación suave */
+            padding: 20px;
+            overflow-y: auto;
+            z-index: 1001;
+        }
+
+        #sidebar.abierto {
+            left: 0; /* Al añadir esta clase, el menú entra a la pantalla */
+        }
+
+        #close-btn {
+            font-size: 20px;
+            background: none;
+            border: none;
+            color: #a0aec0;
+            cursor: pointer;
+            float: right;
+        }
+
+        /* Estilos de la lista de meses */
+        .mes-titulo {
+            color: #2d3748;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 5px;
+            margin-top: 20px;
+        }
+        
+        .lista-historias {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .lista-historias li {
+            margin-bottom: 10px;
+        }
+
+        .lista-historias a {
+            text-decoration: none;
+            color: #4a5568;
+            font-size: 0.95rem;
+        }
+
+        .lista-historias a:hover {
+            color: #3182ce;
+            text-decoration: underline;
+        }
+
+        /* --- ESTILOS DE LA TARJETA PRINCIPAL --- */
         .container {
             background-color: #ffffff;
             padding: 40px;
-            border-radius: 16px; /* Bordes redondeados */
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1); /* Una sombra suave para dar profundidad */
-            max-width: 600px; /* Ancho máximo para que no sea muy ancho en pantallas grandes */
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            max-width: 600px;
             width: 100%;
-            text-align: center; /* Centramos los títulos y las imágenes */
+            text-align: center;
+            margin-top: 40px;
         }
 
-        /* Estilo del título */
-        h1 {
-            color: #2d3748;
-            margin-bottom: 25px;
-            font-size: 2rem;
-        }
-
-        /* Estilo de la imagen */
-        .imagen-dia {
-            max-width: 100%; /* Que se adapte al ancho del contenedor */
-            height: auto;
-            border-radius: 12px; /* Bordes redondeados en la imagen */
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-            margin-bottom: 30px;
-        }
-
-        /* Estilo del texto de la historia */
-        .historia-texto {
-            font-size: 1.15rem;
-            line-height: 1.7; /* Más espacio entre líneas facilita la lectura */
-            color: #4a5568;
-            text-align: left; /* El texto largo se lee mejor alineado a la izquierda */
-            margin-bottom: 40px;
-            padding: 0 10px;
-        }
-
-        /* Pie de página */
-        .footer {
-            border-top: 1px solid #e2e8f0;
-            padding-top: 20px;
-            color: #a0aec0;
-            font-size: 0.9rem;
-        }
+        h1 { color: #2d3748; margin-bottom: 25px; font-size: 2rem; }
+        .imagen-dia { max-width: 100%; height: auto; border-radius: 12px; margin-bottom: 30px; }
+        .historia-texto { font-size: 1.15rem; line-height: 1.7; color: #4a5568; text-align: left; margin-bottom: 40px; }
     </style>
 </head>
 <body>
+
+    <button id="menu-btn" onclick="toggleMenu()">☰</button>
+
+    <nav id="sidebar">
+        <button id="close-btn" onclick="toggleMenu()">✖</button>
+        <h2>Historial</h2>
+        {{MENU}}
+    </nav>
+
     <div class="container">
         <h1>{{TITULO}}</h1>
-        
-        <img src="https://picsum.photos/id/1015/600/350" alt="Imagen del día" class="imagen-dia">
-        
+        <img src="{{IMAGEN_URL}}" alt="Imagen del día" class="imagen-dia">
         <div class="historia-texto">
             <p>{{HISTORIA}}</p>
         </div>
-
         <div class="footer">
-            <small>⚡ Página generada automáticamente con GitHub Actions.</small>
+            <small>⚡ Página generada automáticamente.</small>
         </div>
     </div>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('abierto');
+        }
+    </script>
 </body>
 </html>
