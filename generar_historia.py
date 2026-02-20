@@ -3,7 +3,7 @@ import requests
 import json
 import re
 from datetime import datetime
-
+import uuid
 api_key = os.environ.get("OPENROUTER_API_KEY")
 
 prompt = """
@@ -30,10 +30,11 @@ imagen_match = re.search(r'<IMAGEN>(.*?)</IMAGEN>', respuesta_ia, re.DOTALL)
 
 nuevo_titulo = titulo_match.group(1).strip() if titulo_match else "Historia sin título"
 nueva_historia = historia_match.group(1).strip() if historia_match else "Error al generar la historia."
-palabra_imagen = imagen_match.group(1).strip() if imagen_match else "robot"
-palabra_imagen_segura = palabra_imagen.replace(' ', '%20')
-url_imagen = f"https://image.pollinations.ai/prompt/{palabra_imagen_segura}?width=600&height=350&nologo=true"
-# --- NUEVA LÓGICA DE HISTORIAL Y MEMORIA ---
+# --- NUEVA LÓGICA DE IMAGEN ALEATORIA FIJA ---
+# Generamos un código único aleatorio para esta ejecución
+codigo_unico = uuid.uuid4().hex 
+# Le pedimos a Picsum una imagen basada en ese código
+url_imagen = f"https://picsum.photos/seed/{codigo_unico}/600/350"
 
 # 1. Configurar fechas
 fecha_hoy = datetime.now()
