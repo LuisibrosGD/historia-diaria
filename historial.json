@@ -39,6 +39,10 @@
     ],
     "Marzo 2026": [
         {
+            "titulo": "Error",
+            "archivo": "historia-2026-03-25.html"
+        },
+        {
             "titulo": "El Jardín de los Suspiros",
             "archivo": "historia-2026-03-24.html"
         },
