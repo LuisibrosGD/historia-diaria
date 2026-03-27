@@ -39,6 +39,10 @@
     ],
     "Marzo 2026": [
         {
+            "titulo": "Error",
+            "archivo": "historia-2026-03-27.html"
+        },
+        {
             "titulo": "La Última Simulación",
             "archivo": "historia-2026-03-26.html"
         },
